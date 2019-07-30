@@ -10,14 +10,15 @@ def my_max(*args):
     maxnum = 0
     for num in args:
         if num > maxnum:
-            num = maxnum
+            maxnum = num
     return maxnum
 
 
-# for n in range(2, N-2):
-#     result = 0
-#     if arr[n] > arr[n-2] and arr[n] > arr[n-1] and arr[n] > arr[n+1] and arr[n] > arr[n+2]:
-#         result += arr[n] - my_max(arr[n-2], arr[n-1], arr[n+1], arr[n+2])
+for n in range(2, N-2):
+    result = 0
+    MAX = my_max(arr[n - 2], arr[n - 1], arr[n + 1], arr[n + 2])
+    if MAX < arr[n]:
+        result += arr[n] - MAX
 
 
 
