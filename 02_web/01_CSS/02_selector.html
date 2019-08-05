@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Selector</title>
+  <link rel="stylesheet" href="02_selector.css">
+</head>
+
+<body>
+  <p>빨간색</p>
+  <h1>태그 선택자</h1>
+  <h2 class="pink">클래스 선택자</h2>
+  <h3 id="green">아이디 선택자</h3>
+  <h3 id="purple" class="pink">비교 = 아이디 > 클래스</h3>
+  <h1 class="pink"> 클래스 > 태그</h1>
+
+  <!-- span 태그와 div 태그는 모두 의미는 없지만 '마크업'을 해야 css를 적용 시킬 수 
+    있기 떄문에 활용된다. 특정한 곳을 지정해야함으로 선택자가 필요하고 
+    이를 위해 마크업이 필요한 것이다.
+   -->
+  <p><span id="blue">블루블루</span>, <span class="green">초록초록</span></p>
+  <!-- pink가 마지막에 쓰였지만, css 내부의 blue가 마지막으로 선언되어
+    파란색 -->
+  <p class="bold blue pink">나는 무슨색</p>
+
+  <p class="bold blue pink" id="orange">가장 강한 우선순위</p>
+</body>
+
+</html>
