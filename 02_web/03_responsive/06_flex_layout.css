@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+nav {
+  justify-content: space-between;
+  display: flex;
+  height: 100px;
+  background-color: wheat;
+  align-items: center;
+}
+
+.items {
+  display: flex;
+}
+
+.items>li {
+  list-style-type: none;
+  margin: 0 20px;
+}
+
+.main {
+  display: flex;
+  height: 100%;
+}
+
+aside {
+  width: 150px;
+  height: 100%;
+  background-color: rosybrown;
+}
+
+section {
+  display: flex;
+  background-color: pink;
+  height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.article {
+  background-color: violet;
+  border: 1px solid black;
+  padding: 30px 10px;
+}
+
+footer {
+  background-color: midnightblue;
+  width: 100%;
+  color: white;
+  height: 100px;
+  text-align: center;
+  /* block 속성일 땐 안됌  */
+  margin-top: auto;
+}

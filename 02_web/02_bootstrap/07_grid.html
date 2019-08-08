@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      .square {
+        width: 200px;
+        height: 200px;
+        background-color: lightblue;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--  1. grid 기본 골격 (세개의 합 12) -->
+    <div class="container">
+      <div class="row">
+        <div class="square col-4">1</div>
+        <div class="square col-4">2</div>
+        <div class="square col-4">3</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="square col-3">1</div>
+        <div class="square col-3">2</div>
+        <div class="square col-3">3</div>
+      </div>
+    </div>
+
+    <!-- 3. grid - col-1 -->
+    <div class="container">
+      <div class="row">
+        <div class="square col-1">1</div>
+        <div class="square col-1">2</div>
+        <div class="square col-1">3</div>
+        <div class="square col-1">4</div>
+        <div class="square col-1">5</div>
+        <div class="square col-1">6</div>
+        <div class="square col-1">7</div>
+        <div class="square col-1">8</div>
+        <div class="square col-1">9</div>
+        <div class="square col-1">10</div>
+        <div class="square col-1">11</div>
+        <div class="square col-1">12</div>
+        <!-- 12칸 초과하면 아래로 떨어짐 -->
+        <div class="square col-1">13</div>
+      </div>
+    </div>
+
+    <!-- 4. grid col 합이 12 를 초과하는 경우 -->
+    <div class="container">
+      <div class="row">
+        <div class="square col-3">9</div>
+        <div class="square col-6">4</div>
+        <div class="square col-3">3</div>
+      </div>
+    </div>
+
+    <hr />
+    <!-- 5. grid 정리 -->
+    <div class="container">
+      <h1 class="text-center">정리</h1>
+      <div class="row">
+        <div class="square col-3">col-1</div>
+        <div class="square col-3">col-1</div>
+        <div class="square col-3">col-1</div>
+        <div class="square col-3">col-1</div>
+      </div>
+
+      <div class="row">
+        <div class="square col-3">col-3</div>
+        <div class="square col-3">col-3</div>
+        <div class="square col-3">col-3</div>
+        <div class="square col-3">col-3</div>
+      </div>
+      <div class="row">
+        <div class="square col-4">col-4</div>
+        <div class="square col-8">col-8</div>
+      </div>
+      <div class="row">
+        <div class="square col-2 offset-5">col-2</div>
+      </div>
+      <div class="row">
+        <div class="square col-md-3 col-6">col-4</div>
+        <div class="square col-md-3 col-6">col-8</div>
+        <div class="square col-md-3 col-6">col-8</div>
+        <div class="square col-md-3 col-6">col-8</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="text-center">퀴즈</h2>
+      <!-- 576 미만:1
+    576이상 :2
+    768: 3
+    992: 4
+    1200: 6 -->
+      <div class="row">
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+        <div class="square col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          quiz
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Git</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabledb" href="#">Python</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br />
+    <div class="container">
+      <form>
+        <div class="form-group font-weight-bold text-monospace">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+          />
+          <small id="emailHelp" class="form-text text-muted"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <div class="form-group font-weight-bold text-monospace">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group font-weight-bold text-monospace">
+          <label for="exampleInputPassword1">Password Confirmation</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password Confirmation"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br />
+
+      <div class="card-group">
+        <div class="card">
+          <img
+            src="C:\Users\student\Desktop\TIL\02_web\02_bootstrap\images\image.png"
+            class="card-img-top border"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-monospace">바다</h5>
+            <p class="card-text text-monospace">바다는 파란색이다</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="C:\Users\student\Desktop\TIL\02_web\02_bootstrap\images\image.png"
+            class="card-img-top border"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-monospace">바다</h5>
+            <p class="card-text text-monospace">바다는 파란색이다</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="C:\Users\student\Desktop\TIL\02_web\02_bootstrap\images\image.png"
+            class="card-img-top border"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title font-weight-bold text-monospace">바다</h5>
+            <p class="card-text text-monospace">바다는 파란색이다</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
