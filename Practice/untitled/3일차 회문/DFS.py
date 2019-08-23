@@ -1,6 +1,7 @@
 import sys
 sys.stdin = open('04 Stack1_DFS_input.txt', 'r')
-V, E = map(int, input().split()) # 정점 수, 간선 수
+
+V, E = map(int, input().split())  # 정점 수, 간선 수
 
 G = [[] for _ in range(V+1)]    # 정점 번호 1 ~ V
 
@@ -9,16 +10,17 @@ for _ in range(E):
     G[u].append(v)
     G[v].append(u)
 
+print(G)
 
 for i in range(1, V+1):
     print(i, '-->', G[i])
+
 
 def DFS(v):     # v: 시작점
     S = []
     visit = [False] * (V + 1)
     visit[v] = True   # 시작점 방문
-    S.append(v)     #시작점을 스택에 push
-
+    S.append(v)  # 시작점을 스택에 push
 
     while S:      # 빈 스택이 아닐 동안
 
@@ -28,16 +30,18 @@ def DFS(v):     # v: 시작점
                 S.append(v)         # v 를 스택에  push
                 v = w               # w를 현재 방문하는 정점으로 설정
                 break
-        else:               #이전에 방문한 정점으로 되돌아간다
+        else:  # 이전에 방문한 정점으로 되돌아간다
             v = S.pop()
+
 
 DFS(1)
 
 
-
+# -----------------------------------------------------
 
 def DFSrecursive(v):  # v: 현재 방문하는 정점 (처음에는 시작점)
-    visit[v] = True; print(v, end=' ')
+    visit[v] = True
+    print(v, end=' ')
     for w in G[v]:
         if not visit[w]:
             DFS(w)
