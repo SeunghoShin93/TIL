@@ -38,6 +38,8 @@ def deleteFirst():
     global Head
     if pre == None:
         print('error')
+    else:
+        Head = Head.link
 
 
 data = [1, 2, 3, 4]
