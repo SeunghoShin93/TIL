@@ -31,3 +31,4 @@ def Planner(k, lst):
                 result.append(lst[i])
                 break
             Planner(k+1, lst)
+    
