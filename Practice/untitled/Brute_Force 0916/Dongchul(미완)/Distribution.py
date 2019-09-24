@@ -7,20 +7,21 @@ for t in range(1, T+1):
     N = int(input())
 
     arr = [list(map(int, input().split())) for _ in range(N)]
-
+    for i in range(N):
+        for j in range(N):
+            arr[i][j] /= 100
     visit = [0] * N
     order = []
-    result = 1
 
     lista = []
+    ans = 0
 
-    def perm(k, n):
-        global result
+    def perm(k, n, p):
+        global ans
+        if p <= ans:
+            return
         if k == n:
-            for i in range(N):
-                result *= arr[i][order[i]]/100
-            lista.append(round(result*100, 6))
-            result = 1
+            ans = p
             return
 
         for i in range(n):
@@ -28,11 +29,10 @@ for t in range(1, T+1):
                 continue
             visit[i] = 1
             order.append(i)
-        
-            perm(k+1, n)
+            perm(k+1, n, p * arr[k][i])
             order.pop()
             visit[i] = 0
 
-    perm(0, N)
+    perm(0, N, 100)
 
-    print('#{} {:.6f}'.format(t, round(max(lista), 6)))
+    print('#{} {:.6f}'.format(t, round(ans, 6)))
