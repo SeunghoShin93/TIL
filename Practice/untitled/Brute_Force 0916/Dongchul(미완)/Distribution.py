@@ -12,8 +12,6 @@ for t in range(1, T+1):
             arr[i][j] /= 100
     visit = [0] * N
     order = []
-
-    lista = []
     ans = 0
 
     def perm(k, n, p):
