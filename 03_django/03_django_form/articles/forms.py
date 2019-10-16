@@ -49,9 +49,7 @@ class ArticleForm(forms.ModelForm):
         # }
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(max_length=140)
-    created_at = forms.DateTimeField()
-    updated_at = forms.DateTimeField()
+
     class Meta:
         model = Comment
-        fields ='__all__'
+        fields = ('content',)

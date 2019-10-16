@@ -27,7 +27,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     class Meta:
-        ordering = ['-pk']
+        ordering = ('-pk',)
 
     def __str__(self):
         return self.content

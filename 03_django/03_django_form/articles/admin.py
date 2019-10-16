@@ -7,8 +7,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 
-
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('content',)
 
-admin.site.register(Comment, CommentAdmin)
