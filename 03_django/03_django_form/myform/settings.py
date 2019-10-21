@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    
+    'accounts.apps.AccountsConfig',
     'articles.apps.ArticlesConfig',
     'bootstrap4',
     'django.contrib.admin',
@@ -117,7 +117,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+# django 에게 session data 커스텀 선언 
+# request.session.modified = True 를 기본값으로 사용 
+# SESSION_SAVE_EVERY_REQUEST = True
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+

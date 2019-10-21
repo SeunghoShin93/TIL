@@ -123,13 +123,17 @@ TIL
 2. user 레코드 생성
 
    ```python
-   # orm  user = User(id=101, first_name='신', last_name='승호', age=27, country='대전', phone='0
-       ...: 10-1234-1234', balance=100000)
-           user.save()
+   # orm  
+   user = User(id=101, first_name='신', last_name='승호', age=27, country='대전', phone='010-1234-1234', balance=100000)
+   user.save()
+           
+   # 답
+   User.objects.create(first_name='신', last_name='승호', age=27, country='대전', phone='010-1234-1234', balance=100000)
    ```
 
    ```sql
-   -- sql INSERT INTO users_user VALUES (101, '호호', '하', 35, '충청북도', '030-2345-3242', 50000);
+   -- sql 
+   INSERT INTO users_user VALUES (103, '호호', '하', 35, '충청북도', '030-2345-3242', 50000);
    ```
 
    * 하나의 레코드를 빼고 작성 후 `NOT NULL` constraint 오류를 orm과 sql에서 모두 확인 해보세요.
@@ -139,11 +143,13 @@ TIL
    - `101` 번 id의 전체 레코드 조회
 
    ```python
-   # orm User.objects.get(id=101)
+   # orm 
+   User.objects.get(id=101)
    ```
 
    ```sql
-   -- sql SELECT * FROM users_user WHERE id=101;
+   -- sql 
+   SELECT * FROM users_user WHERE id=101;
    ```
 
 4. 해당 user 레코드 수정
@@ -153,10 +159,12 @@ TIL
 
    ```python
    # orm
+   user = User.objects.get(pk=101)
    ```
 
       ```sql
-   -- sql UPDATE users_user SET first_name='철수' WHERE id=101;
+   -- sql 
+   UPDATE users_user SET first_name='철수' WHERE id=101;
       ```
 
 5. 해당 user 레코드 삭제
@@ -166,17 +174,19 @@ TIL
 
    ```python
    # orm
-   ```
-
+   User.objects.get(pk=101).delete()
+```
+   
    ```sql
-   -- sql  DELETE FROM users_user where id=101;
+   -- sql  
+   DELETE FROM users_user where id=101;
    ```
 
 
 
 ---
 
-
+` print(orm문.query)`  : sql 문 출력
 
 ### 2. 조건에 따른 쿼리문
 
@@ -186,10 +196,12 @@ TIL
 
    ```python
    # orm
+   len(User.objects.all())
    ```
 
    ```sql
-   -- sql   SELECT COUNT(*) FROM users_user;
+   -- sql   
+   SELECT COUNT(*) FROM users_user;
    ```
 
 2. 나이가 30인 사람의 이름
@@ -199,10 +211,12 @@ TIL
 
    ```python
    # orm
+   User.objects.filter(age=30).values('first_name')
    ```
 
       ```sql
-   -- sql SELECT first_name FROM users_user where age=30;
+   -- sql 
+   SELECT first_name FROM users_user where age=30;
       ```
 
 3. 나이가 30살 이상인 사람의 인원 수
@@ -211,6 +225,7 @@ TIL
 
    ```python
    # orm
+   User.objects.filter(age=30).count()
    ```
 
       ```sql
@@ -221,30 +236,36 @@ TIL
 
    ```python
    # orm
+   User.objects.filter(age__lte=20).count()
    ```
 
    ```sql
-   -- sql SELECT COUNT(*) FROM users_user where age<=20;
+   -- sql
+   SELECT COUNT(*) FROM users_user where age<=20;
    ```
 
 5. 나이가 30이면서 성이 김씨인 사람의 인원 수
 
    ```python
    # orm
+   User.objects.filter(age=30, last_name='김').count()
    ```
 
       ```sql
-   -- sql SELECT COUNT(*) FROM users_user where age=30 AND last_name='김';
+   -- sql 
+   SELECT COUNT(*) FROM users_user where age=30 AND last_name='김';
       ```
 
 6. 나이가 30이거나 성이 김씨인 사람?
 
    ```python
    # orm
+   User.objects.filter(Q(age=30)|Q(last_name='김'))
    ```
 
    ```sql
-   -- sql SELECT COUNT(*) FROM users_user where age=30 OR last_name='김';
+   -- sql 
+   SELECT COUNT(*) FROM users_user where age=30 OR last_name='김';
    ```
 
 7. 지역번호가 02인 사람의 인원 수
@@ -253,20 +274,27 @@ TIL
 
    ```python
    # orm
+   User.objects.filter(phone__startswith='02-').count()
    ```
 
       ```sql
-   -- sql SELECT COUNT(*) FROM users_user where phone LIKE '02%';
+   -- sql 
+   SELECT COUNT(*) FROM users_user where phone LIKE '02%';
       ```
 
 8. 거주 지역이 강원도이면서 성이 황씨인 사람의 이름
 
    ```python
    # orm
-   ```
+   User.objects.filter(country='강원도',last_name='황').values('first_name')
 
+   # 이름만 출력
+   User.objects.filter(country='강원도',last_name='황').values('first_name').first().get('first_name')
+   ```
+   
       ```sql
-   -- sql SELECT COUNT(*) FROM users_user where last_name='황' AND country='강원도';a
+   -- sql 
+   SELECT COUNT(*) FROM users_user where last_name='황' AND country='강원도';a
       ```
 
 
@@ -279,42 +307,50 @@ TIL
 
 1. 나이가 많은 사람순으로 10명
 
-      ```python
+   ```python
    # orm
+   User.objects.order_by('-age')[:10]
    ```
 
       ```sql
-   -- sql SELECT * FROM users_user ORDER BY age DESC LIMIT 10;
+   -- sql 
+   SELECT * FROM users_user ORDER BY age DESC LIMIT 10;
       ```
 
 2. 잔액이 적은 사람순으로 10명
 
-      ```python
+   ```python
    # orm
+   User.objects.order_by('balance')[:10]
    ```
 
       ```sql
-   -- sql  SELECT * FROM users_user ORDER BY balance LIMIT 10;
+   -- sql  
+   SELECT * FROM users_user ORDER BY balance LIMIT 10;
       ```
 
 3. 잔고는 오름차순, 나이는 내림차순으로 10명?
 
       ```python
    # orm
-   ```
-
+   User.objects.order_by('balance', '-age')[:10]
+```
+   
    ```sql
-   -- sql SELECT * FROM users_user ORDER BY balance ASC, age DESC LIMIT 10;
+   -- sql 
+   SELECT * FROM users_user ORDER BY balance ASC, age DESC LIMIT 10;
    ```
    
 4. 성, 이름 내림차순 순으로 5번째 있는 사람
 
    ```python
    # orm
-   ```
-
+   User.objects.order_by('-last_name', '-first_name')[4]
+```
+   
       ```sql
-   -- sql SELECT * FROM users_user ORDER BY last_name DESC, first_name DESC LIMIT 1 OFFSET 4;
+   -- sql 
+   SELECT * FROM users_user ORDER BY last_name DESC, first_name DESC LIMIT 1 OFFSET 4;
       ```
 
 
@@ -325,7 +361,7 @@ TIL
 
 ### 4. 표현식
 
-> ORM: `aggregate` 사용
+> ORM: `aggregate` 사용 (annotate :새로운 값 추가)
 >
 > https://docs.djangoproject.com/en/2.2/topics/db/aggregation/#aggregation
 >
@@ -334,50 +370,60 @@ TIL
 
 1. 전체 평균 나이
 
-      ```python
+   ```python
    # orm
+    User.objects.aggregate(Avg('age'))
    ```
 
       ```sql
-   -- sql SELECT AVG(age) FROM users_user;
+   -- sql 
+   SELECT AVG(age) FROM users_user;
       ```
 
 2. 김씨의 평균 나이
 
-      ```python
+   ```python
    # orm
+   User.objects.filter(last_name='김').aggregate(Avg('age'))
    ```
 
       ```sql
-   -- sql SELECT AVG(age) FROM users_user WHERE last_name='김';
+   -- sql 
+   SELECT AVG(age) FROM users_user WHERE last_name='김';
       ```
 
 3. 강원도에 사는 사람의 평균 계좌 잔고
 
    ```python
    # orm
+   User.objects.filter(country='강원도').aggregate(Avg('balance'))
    ```
 
    ```sql
-   -- sql SELECT AVG(balance) FROM users_user WHERE country='강원도';
+   -- sql 
+   SELECT AVG(balance) FROM users_user WHERE country='강원도';
    ```
 
 4. 계좌 잔액 중 가장 높은 값
 
    ```python
    # orm
+   User.objects.aggregate(Max('balance'))
    ```
 
       ```sql
-   -- sql SELECT MAX(balance) FROM users_user;
+   -- sql 
+   SELECT MAX(balance) FROM users_user;
       ```
 
 5. 계좌 잔액 총액
 
    ```python
    # orm
-   ```
-
+   User.objects.aggregate(Sum('balance'))
+```
+   
       ```sql
-   -- sql  SELECT SUM(balance) FROM users_user;
+   -- sql  
+   SELECT SUM(balance) FROM users_user;
       ```
