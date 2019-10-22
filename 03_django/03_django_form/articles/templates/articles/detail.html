@@ -9,29 +9,38 @@
 <p>{{ article.updated_at|date:"e, M, j, Y"}}</p>
 
 <!-- 댓글 입력 -->
+{% if user.is_authenticated %}
 <form action="{% url 'articles:comments_create' article.pk %}" method="post">
   {% csrf_token %}
   {{ commentform }}
   <input type="submit" value="submit">
 </form>
+{% else %}
+<a href="{% url 'accounts:login' %}"> 댓글 작성하려면 로그인하세요 </a>
+{% endif %}
 <hr>
 <!-- 댓글 출력-->
 {% for comment in comments %}
 <div>
-  <p>댓글 : {{ forloop.revcounter }}:{{ comment.content }}</p>
+  <p>댓글 {{ forloop.revcounter }} --- 작성자 {{ comment.user }} --- {{ comment.content }}</p>
+  {% if request.user == comment.user %}
   <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST" style="display: inline;">
     {% csrf_token %}
     <input type="submit" value="DELETE">
   </form>
+  {% endif %}
 </div>
 {% empty %}
 <p><b>no 댓글</b></p>
 {% endfor %}
-<hr>
 
+<hr>
+<a href="{% url 'articles:index' %}">BACK</a>
+{% if request.user == article.user %}
 <a href="{% url 'articles:update' article.pk %}">[EDIT]</a>
 <form action="{% url 'articles:delete' article.pk %}" method="POST" onclick="return confirm('진짜 지울거냐')">
   {% csrf_token %}
   <input type="submit" value="DELETE">
 </form>
+{% endif %}
 {% endblock %}

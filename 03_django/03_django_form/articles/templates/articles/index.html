@@ -8,9 +8,6 @@
 <a href="{% url 'accounts:login' %}">[로그인 필요]</a>
 {% endif %}
 {% for article in articles %}
-<p>{{ article.pk}}</p>
-<p>{{ article.title}}</p>
-<a href="{{ article.get_absolute_url }}">DETAIL</a>
-<hr>
+{% include 'articles/_article.html' %}
 {% endfor %}
 {% endblock content %}
