@@ -3,7 +3,6 @@ from imagekit.processors import Thumbnail
 from django.urls import reverse
 from django.db import models
 
-
 def articles_image_path(instance, filename):
     return f'articles/{instance.pk}/images/{filename}'
 

@@ -35,6 +35,7 @@
 {% endfor %}
 
 <hr>
+{% include 'articles/_follow.html' %}
 <a href="{% url 'articles:index' %}">BACK</a>
 {% if request.user == article.user %}
 <a href="{% url 'articles:update' article.pk %}">[EDIT]</a>

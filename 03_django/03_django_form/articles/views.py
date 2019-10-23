@@ -1,5 +1,6 @@
 import hashlib
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.http import Http404, HttpResponse
 from django.views.decorators.http import require_POST
@@ -8,9 +9,7 @@ from .forms import ArticleForm, CommentForm
 from IPython import embed
 # Create your views here.
 
-
 def index(request):
-
     # session 에 visits_num 키로 접근해 값을 가져온다.
     # 기본적으로 존재하지 않는 키이기 때문에 키가 없다면 (방문한 적이 없다면 ) 0 값을 가져오도록 한다.
     visits_num = request.session.get('visits_num', 0)
@@ -52,9 +51,9 @@ def create(request):
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     comments = article.comment_set.all()
+    person = get_object_or_404(get_user_model(), pk=article.user_id)
     commentform = CommentForm()  # 댓글 폼
-    context = {'article': article,
-               'commentform': commentform, 'comments': comments}
+    context = {'article': article,'commentform': commentform, 'comments': comments, 'person':person}
     return render(request, 'articles/detail.html', context)
 
 
@@ -137,3 +136,16 @@ def like(request, article_pk):
     # else:
     #     article.like_users.add(request.user)        # 좋아요 누름
     return redirect('articles:index')
+
+@login_required
+def follow(request, article_pk, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)    # 게시글 유저
+    user = request.user # 접속 유저
+    if user != person:
+    # 내가 (request.user 가) 게시글 유저 팔로워 목록에 이미 존재한다면 팔로우 취소
+        if person.followers.filter(pk=user.pk).exists():
+            person.followers.remove(user)
+        else:
+            person.followers.add(user)
+        # if user in person.followers.all()
+    return redirect('articles:detail', article_pk)

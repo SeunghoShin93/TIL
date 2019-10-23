@@ -117,8 +117,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# django 에게 session data 커스텀 선언 
-# request.session.modified = True 를 기본값으로 사용 
+# django 에게 session data 커스텀 선언
+# request.session.modified = True 를 기본값으로 사용
 # SESSION_SAVE_EVERY_REQUEST = True
 
 
@@ -127,4 +127,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'accounts.User'
