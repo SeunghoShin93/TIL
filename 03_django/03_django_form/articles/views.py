@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.http import Http404, HttpResponse
 from django.views.decorators.http import require_POST
-from .models import Article, Comment
+from .models import Article, Comment, Hashtag
 from .forms import ArticleForm, CommentForm
 from IPython import embed
 # Create your views here.
@@ -37,6 +37,12 @@ def create(request):
             article = form.save(commit=False)
             article.user = request.user
             article.save()
+            # hashtag
+            for word in article.content.split():    # 공백 기준으로 리스트로 분할
+                if word.startswith('#'):
+                    hashtag, created = Hashtag.objects.get_or_create(content=word)  # word 랑 같은 해시태그를 찾는데 있으면 기존 객체 (.get), 없으면 새로운 객체 생성 (.create)
+                    article.hashtags.add(hashtag) # created 를 사용하지 않았다면, hashtag[0] 으,로 작성
+
             return redirect(article)
     else:
         form = ArticleForm()
@@ -76,6 +82,12 @@ def update(request, article_pk):
             form = ArticleForm(request.POST, instance=article)
             if form.is_valid():
                 article = form.save()
+                # hashtag
+                article.hashtags.clear()     # 해당 article 의 hashtag 전체 삭제
+                for word in article.content.split():    # 공백 기준으로 리스트로 분할
+                    if word.startswith('#'):
+                        hashtag, created = Hashtag.objects.get_or_create(content=word)  # word 랑 같은 해시태그를 찾는데 있으면 기존 객체 (.get), 없으면 새로운 객체 생성 (.create)
+                        article.hashtags.add(hashtag)
                 return redirect(article)
         else:
             # ArticleForm 을 초기화 (이전에 DB에 저장된 데이터를 넣어준 상태)
@@ -149,3 +161,10 @@ def follow(request, article_pk, user_pk):
             person.followers.add(user)
         # if user in person.followers.all()
     return redirect('articles:detail', article_pk)
+
+
+def hashtag(request, hash_pk):
+    hashtag = get_object_or_404(Hashtag, pk=hash_pk)
+    articles = hashtag.article_set.order_by('-pk')
+    context = {'hashtag':hashtag, 'articles':articles}
+    return render(request, 'articles/hashtag.html', context)

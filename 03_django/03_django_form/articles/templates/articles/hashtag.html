@@ -1,0 +1,37 @@
+{% extends 'articles/base.html' %}
+{% block content %}
+
+<h3>어떤 해시태그 인지 : {{ hashtag.content }} </h3>
+
+<h3>몇개의 게시글인지 : {{ articles.count }}</h3>
+
+<h3>게시글 제목 / 좋아요 개수 댓글 개수출력</h3>
+
+<div class="jumbotron jumbotron-fluid text-center my-2 text-white bg-dark">
+  <div class="container">
+    <h1 class="display-4">{{ hashtag.content }}</h1>
+    <p class="lead">{{ articles.count }} 개의 게시글</p>
+  </div>
+</div>
+<hr>
+<h3 class="text-center">{{ hashtag.content }} 를 태그한 글</h3>
+<div class="row">
+
+  {% for article  in articles %}
+  {% with likes=article.like_users.all comments=article.comment_set.all  %}
+  <div class="col-4 my-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <p class="card-text">{{ likes|length }} 명이 좋아요</p>
+        <p class="card-text">{{ comments|length }} 개의 댓글</p>
+        <a href="{% url 'articles:detail' article.pk %}" class="btn btn-success">게시글 보기</a>
+      </div>
+    </div>
+  </div>
+  {% endwith %}
+  {% endfor %}
+  
+</div>
+{% endblock content %}
+
