@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="todo">
+    <h1>todo</h1>
+    <input @keyup.enter="addTodo" v-model="newTodo" type="text">
+    <button @click="addTodo">+</button>
+    <ul v-for="todo in todos" v-bind:key="todo.id">
+      <li>{{ todo.content }} {{ todo.todayDate }}</li>
+      <button @click="removeTodo(todo.id)">x</button>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#todo',
+      data: {
+        todos: [],
+        newTodo: '',
+
+      },
+      methods: {
+        addTodo: function () {
+          if (this.newTodo.length !== 0) {
+            this.todos.push({
+              id: Date.now(),
+              content: this.newTodo,
+              completed: false,
+              todayDate: Date()
+            })
+            this.newTodo = ''
+          }
+        },
+        removeTodo: function (todoId) {
+          this.todos = this.todos.filter(todo => {
+            return todo.id !== todoId
+          })
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>
