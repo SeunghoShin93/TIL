@@ -22,7 +22,7 @@
       <div class="form-group">
         <label for="password">PASSWORD</label>
         <input
-          type="text"
+          type="password"
           class="form-control"
           id="password"
           placeholder="비밀번호를 입력하십시오"
@@ -36,7 +36,7 @@
 
 <script>
 import axios from "axios";
-
+import router from "../router";
 export default {
   name: "LoginForm",
   data() {
@@ -53,12 +53,18 @@ export default {
     login() {
       if (this.checkForm()) {
         this.loading = true;
+        // django jwt 를 생성하는 주소로 요청을 보냄
+        // 이때 post 요청으로 보내야하며 사용자가 입력한 로그인 정보를 같이 넘겨야 함.
         axios
-          .get("https://127.0.0.1:8000", this.credentials)
+          .post("http://127.0.0.1:8000/api-token-auth/", this.credentials)
           .then(res => {
-            console.log(res);
+            this.$session.start();
+            this.$session.set("jwt", res.data.token);
+            router.push("/");
           })
           .catch(err => {
+            // 3. 로그인 실패시 loading의 상태를 다시 false로
+            this.loading = false;
             console.log(err);
           });
       } else {
