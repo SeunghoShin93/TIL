@@ -1,7 +1,7 @@
 <template>
   <div class="todo-input">
     <form class="input-group mb-3" @submit.prevent="createTodo">
-      <input type="text" class="form-control" v-model="title" /> />
+      <input type="text" class="form-control" v-model="title" />
       <button type="submit" class="btn btn-primary">+</button>
     </form>
   </div>
