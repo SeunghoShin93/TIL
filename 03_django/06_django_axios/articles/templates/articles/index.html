@@ -25,6 +25,7 @@
       axios.defaults.xsrfCookieName = 'csrftoken'
       axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
+
       axios.post(`/articles/${articleId}/like/`)
         .then(response => {
           document.querySelector(`#like-count-${articleId}`).innerText = response.data.count
@@ -40,7 +41,4 @@
     })
   })
 </script>
-
-
-
 {% endblock content %}
