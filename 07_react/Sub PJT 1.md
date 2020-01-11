@@ -26,9 +26,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
  2. #### Extensions
 
      	1. ESLint
-     	2. ES7 React/Redux/GraphQL/React-Native Snippets
-     	3. Prettier
-     	4. Rainbow Brackets
+          	2. ES7 React/Redux/GraphQL/React-Native Snippets
+               	3. Prettier
+                    	4. Rainbow Brackets
 
 ### 4. Chrome extensions - React Dev Tools
 
@@ -62,4 +62,10 @@ npm start
 위포트 ncs  하주응 문제해결 자료해석 
 
 에듀얼 / 위포트 통합 기본서
+
+
+
+
+
+git 실험
 
