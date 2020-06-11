@@ -335,7 +335,7 @@
     
     
     @app.route('/pong')
-    def pong():
+    def pong():	
         age = request.args.get('age')
     		return render_template('pong.html', age_in_html=age)
     ```
