@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Seungho Shin\Desktop\TIL\04_db\01_sql_orm\venv"
+VIRTUAL_ENV="C:\Users\Seungho Shin\Desktop\TIL\RECRUD\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -18,7 +18,7 @@
 
   - check `cmd $  sc query intelhaxm `  status: 4 RUNNING
 
-    
+  ** Prerequesite : Hyper-V **MUST** be disabled 
 
 ### Android Studio Install...
 

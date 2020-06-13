@@ -175,12 +175,13 @@ TIL
    ```python
    # orm
    User.objects.get(pk=101).delete()
+   ```
 ```
    
    ```sql
    -- sql  
    DELETE FROM users_user where id=101;
-   ```
+```
 
 
 
@@ -334,24 +335,26 @@ TIL
       ```python
    # orm
    User.objects.order_by('balance', '-age')[:10]
+   ```
 ```
    
    ```sql
    -- sql 
    SELECT * FROM users_user ORDER BY balance ASC, age DESC LIMIT 10;
-   ```
-   
+```
+
 4. 성, 이름 내림차순 순으로 5번째 있는 사람
 
    ```python
    # orm
    User.objects.order_by('-last_name', '-first_name')[4]
+   ```
 ```
    
       ```sql
    -- sql 
    SELECT * FROM users_user ORDER BY last_name DESC, first_name DESC LIMIT 1 OFFSET 4;
-      ```
+```
 
 
 
@@ -421,9 +424,10 @@ TIL
    ```python
    # orm
    User.objects.aggregate(Sum('balance'))
+   ```
 ```
    
       ```sql
    -- sql  
    SELECT SUM(balance) FROM users_user;
-      ```
+```

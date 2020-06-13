@@ -24,7 +24,7 @@
 {% for comment in comments %}
 <div>
   <p>댓글 {{ forloop.revcounter }} --- 작성자 {{ comment.user }} --- {{ comment.content }}</p>
-  {% if request.user == comment.user %}
+  {% dif request.user == comment.user %}
   <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST" style="display: inline;">
     {% csrf_token %}
     <input type="submit" value="DELETE">

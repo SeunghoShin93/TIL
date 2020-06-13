@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content%}
-
+{% if user.is_authenticated %}
+<p>환영합니다. {{request.user}} 님 </p>
+{% else %}
+<p> 로그인해주세요</p>
+{% endif %}
+<a href="{% url 'accounts:signup' %}">회원가입</a>
+<a href="{% url 'accounts:login' %}">로그인</a>
+<a href="{% url 'accounts:logout' %}">로그아웃</a>
 <h1> INDEX </h1>
 
 
 <a href="{% url 'articles:create' %}">새로 만들기</a>
+
 {% for article in articles %}
-<p>{{ article.pk}}</p>
+
+<p>{{ article.pk }}</p>
 <p>{{ article.title }}</p>
 <p>{{ article.content }}</p>
+<p>{{ article.comment_set.all|length }} 개의 댓글</p>
 <a href="{% url 'articles:detail' article.pk %}">[DETAIL]</a>
 
 <hr>
-{% endfor %}
-{% endblock %}
 
+{% endfor %}
+
+{% endblock %}
