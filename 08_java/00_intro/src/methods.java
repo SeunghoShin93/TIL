@@ -10,7 +10,7 @@ public class methods {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// 이름이 같지만 return 값이 다른 함수 => 매개 변수에 따라 처리함
 		System.out.println(add("Hello ", "Java"));
 		System.out.println(add(3, 5));
 	}
