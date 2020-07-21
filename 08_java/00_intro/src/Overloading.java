@@ -1,5 +1,5 @@
 
-public class methods {
+public class Overloading {
 	static String add(String a, String b) {
 		return a + b;
 		

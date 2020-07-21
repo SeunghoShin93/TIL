@@ -1,6 +1,6 @@
 
 public class Switch {
-
+	
 	public static void main(String[] args) {
 		int a = 3;
 		int b = 5;
@@ -22,7 +22,7 @@ public class Switch {
 //			System.out.println("haha");
 //			break ;
 		}
-
+// switch() 에 들어갈 식은 boolean 은 될 수 없다. string 이나 integer 가 가능한 모양
 	}
 
 }
